@@ -25,7 +25,7 @@ class Ui_MainWindow(object):
         font.setWeight(75)
         self.label_result.setFont(font)
         self.label_result.setStyleSheet("background-color: rgb(136, 138, 133);\n"
-"color: rgb(238, 238, 236);")
+                                        "color: rgb(238, 238, 236);")
         self.label_result.setObjectName("label_result")
         self.btn_zero = QtWidgets.QPushButton(self.centralwidget)
         self.btn_zero.setGeometry(QtCore.QRect(0, 319, 150, 81))
@@ -71,7 +71,7 @@ class Ui_MainWindow(object):
         font.setWeight(75)
         self.btn_3.setFont(font)
         self.btn_3.setStyleSheet("\n"
-"background-color: rgb(245, 121, 0);")
+                                 "background-color: rgb(245, 121, 0);")
         self.btn_3.setObjectName("btn_3")
         self.btn_4 = QtWidgets.QPushButton(self.centralwidget)
         self.btn_4.setGeometry(QtCore.QRect(0, 140, 101, 91))
@@ -225,6 +225,7 @@ class Ui_MainWindow(object):
 
 if __name__ == "__main__":
     import sys
+
     app = QtWidgets.QApplication(sys.argv)
     MainWindow = QtWidgets.QMainWindow()
     ui = Ui_MainWindow()
