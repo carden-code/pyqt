@@ -36,15 +36,15 @@ class Ui_MainWindow(object):
         self.btn_zero.setFont(font)
         self.btn_zero.setStyleSheet("background-color: rgb(245, 121, 0);")
         self.btn_zero.setObjectName("btn_zero")
-        self.lebel_equal = QtWidgets.QPushButton(self.centralwidget)
-        self.lebel_equal.setGeometry(QtCore.QRect(150, 319, 150, 81))
+        self.btn_equal = QtWidgets.QPushButton(self.centralwidget)
+        self.btn_equal.setGeometry(QtCore.QRect(150, 319, 150, 81))
         font = QtGui.QFont()
         font.setPointSize(17)
         font.setBold(True)
         font.setWeight(75)
-        self.lebel_equal.setFont(font)
-        self.lebel_equal.setStyleSheet("background-color: rgb(174, 23, 23);")
-        self.lebel_equal.setObjectName("lebel_equal")
+        self.btn_equal.setFont(font)
+        self.btn_equal.setStyleSheet("background-color: rgb(174, 23, 23);")
+        self.btn_equal.setObjectName("lebel_equal")
         self.btn_1 = QtWidgets.QPushButton(self.centralwidget)
         self.btn_1.setGeometry(QtCore.QRect(0, 230, 101, 91))
         font = QtGui.QFont()
@@ -170,12 +170,14 @@ class Ui_MainWindow(object):
 
         self.add_functions()
 
+        self.is_equal = False
+
     def retranslateUi(self, MainWindow):
         _translate = QtCore.QCoreApplication.translate
         MainWindow.setWindowTitle(_translate("MainWindow", "Калькулятор"))
         self.label_result.setText(_translate("MainWindow", "0"))
         self.btn_zero.setText(_translate("MainWindow", "0"))
-        self.lebel_equal.setText(_translate("MainWindow", "="))
+        self.btn_equal.setText(_translate("MainWindow", "="))
         self.btn_1.setText(_translate("MainWindow", "1"))
         self.btn_2.setText(_translate("MainWindow", "2"))
         self.btn_3.setText(_translate("MainWindow", "3"))
@@ -206,8 +208,20 @@ class Ui_MainWindow(object):
         self.btn_multiply.clicked.connect(lambda: self.write_number(self.btn_multiply.text()))
         self.btn_division.clicked.connect(lambda: self.write_number(self.btn_division.text()))
 
+        self.btn_equal.clicked.connect(self.results)
+
     def write_number(self, number):
-        print(number)
+        if self.label_result.text() == '0' or self.is_equal:
+            self.label_result.setText(number)
+            self.is_equal = False
+        else:
+            self.label_result.setText(self.label_result.text() + number)
+
+    def results(self):
+        res = eval(self.label_result.text())
+        self.label_result.setText("Результат: " + str(res))
+        self.is_equal = True
+
 
 if __name__ == "__main__":
     import sys
