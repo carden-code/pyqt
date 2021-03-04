@@ -217,6 +217,7 @@ class Ui_MainWindow(object):
         else:
             self.label_result.setText(self.label_result.text() + number)
 
+    #
     def results(self):
         res = eval(self.label_result.text())
         self.label_result.setText("Результат: " + str(res))
