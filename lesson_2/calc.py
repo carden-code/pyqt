@@ -172,6 +172,8 @@ class Ui_MainWindow(object):
 
         self.is_equal = False
 
+        self.symbol = False
+
     def retranslateUi(self, MainWindow):
         _translate = QtCore.QCoreApplication.translate
         MainWindow.setWindowTitle(_translate("MainWindow", "Калькулятор"))
@@ -212,16 +214,28 @@ class Ui_MainWindow(object):
 
     def write_number(self, number):
         if self.label_result.text() == '0' or self.is_equal:
-            self.label_result.setText(number)
-            self.is_equal = False
+            if number.isdigit():
+                self.label_result.setText(number)
+                self.is_equal = False
         else:
-            self.label_result.setText(self.label_result.text() + number)
+            if number.isdigit():
+                self.label_result.setText(self.label_result.text() + number)
+                self.symbol = True
+            else:
+                if self.symbol:
+                    self.label_result.setText(self.label_result.text() + number)
+                    self.symbol = False
 
-    #
     def results(self):
-        res = eval(self.label_result.text())
-        self.label_result.setText("Результат: " + str(res))
-        self.is_equal = True
+        try:
+            res = eval(self.label_result.text())
+
+        except (ZeroDivisionError, SyntaxError):
+            self.label_result.setText("Результат: Error")
+            self.is_equal = True
+        else:
+            self.label_result.setText("Результат: " + str(res))
+            self.is_equal = True
 
 
 if __name__ == "__main__":
