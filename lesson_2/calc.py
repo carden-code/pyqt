@@ -216,8 +216,9 @@ class Ui_MainWindow(object):
         if self.label_result.text() == '0' or self.is_equal:
             if number.isdigit() or number == '-':
                 self.label_result.setText(number)
-                self.symbol = False
                 self.is_equal = False
+                if number == '-':
+                    self.symbol = False
         else:
             if number.isdigit():
                 self.label_result.setText(self.label_result.text() + number)
@@ -233,6 +234,7 @@ class Ui_MainWindow(object):
         except (ZeroDivisionError, SyntaxError):
             self.label_result.setText("Результат: Error")
             self.is_equal = True
+            self.symbol = True
         else:
             self.label_result.setText("Результат: " + str(res))
             self.is_equal = True
