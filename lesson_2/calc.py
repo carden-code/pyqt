@@ -214,8 +214,9 @@ class Ui_MainWindow(object):
 
     def write_number(self, number):
         if self.label_result.text() == '0' or self.is_equal:
-            if number.isdigit():
+            if number.isdigit() or number == '-':
                 self.label_result.setText(number)
+                self.symbol = False
                 self.is_equal = False
         else:
             if number.isdigit():
@@ -229,7 +230,6 @@ class Ui_MainWindow(object):
     def results(self):
         try:
             res = eval(self.label_result.text())
-
         except (ZeroDivisionError, SyntaxError):
             self.label_result.setText("Результат: Error")
             self.is_equal = True
